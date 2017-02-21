@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5665.robot.subsystems;
 
 import org.usfirst.frc.team5665.robot.RobotMap;
+import org.usfirst.frc.team5665.robot.commands.Teleop;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -21,7 +22,14 @@ public class Drive extends Subsystem {
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new Teleop());
 		
+	}
+	
+	public void arcadeDrive(double xAxis, double yAxis) {
+		robotDrive4.arcadeDrive(yAxis, xAxis);
+	}
+	public void setSensitivity(double sensitivity) {
+		robotDrive4.setMaxOutput(sensitivity);
 	}
 }

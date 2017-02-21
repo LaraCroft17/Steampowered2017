@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team5665.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -14,6 +15,7 @@ import org.usfirst.frc.team5665.robot.subsystems.Drive;
 import org.usfirst.frc.team5665.robot.subsystems.FuelCollector;
 import org.usfirst.frc.team5665.robot.subsystems.GearHolder;
 import org.usfirst.frc.team5665.robot.subsystems.Ramp;
+import org.usfirst.frc.team5665.robot.RobotMap;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,12 +26,14 @@ import org.usfirst.frc.team5665.robot.subsystems.Ramp;
  */
 public class Robot extends IterativeRobot {
 
-	public static final Drive drive = new Drive();
-	public static final Climber climber = new Climber();
-	public static final FuelCollector fuelCollector = new FuelCollector();
-	public static final GearHolder gearHolder = new GearHolder();
-	public static final Ramp ramp = new Ramp();
+	public static Drive drive;
+	public static Climber climber;
+	public static FuelCollector fuelCollector;
+	public static GearHolder gearHolder;
+	public static Ramp ramp;
 	public static OI oi;
+	
+	public static boolean calibrateEnabled;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -40,10 +44,21 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		RobotMap.init();
+		drive = new Drive();
+		climber = new Climber();
+		fuelCollector = new FuelCollector();
+		gearHolder = new GearHolder();
+		ramp = new Ramp();
 		oi = new OI();
+		
+		calibrateEnabled = false;
+		
 		chooser.addDefault("Default", new AutoCommand());
 		//chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
