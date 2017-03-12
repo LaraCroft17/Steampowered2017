@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5665.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team5665.robot.Robot;
@@ -8,8 +9,13 @@ import org.usfirst.frc.team5665.robot.Robot;
  *
  */
 public class MoveGearHolder extends Command {
-	public MoveGearHolder() {
+	
+	boolean isFinished = false;
+	private double duration;
+	
+	public MoveGearHolder(double duration) {
 		// Use requires() here to declare subsystem dependencies
+		this.duration = duration;
 		requires(Robot.gearHolder);
 	}
 
@@ -21,17 +27,22 @@ public class MoveGearHolder extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		
+		//TODO Add vision processed decisions here
+		Timer.delay(duration);
+		isFinished = true;
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return isFinished;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+		Robot.gearHolder.moveSlider(0);
 	}
 
 	// Called when another command which requires one or more of the same
