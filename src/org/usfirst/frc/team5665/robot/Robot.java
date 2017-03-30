@@ -50,9 +50,8 @@ public class Robot extends IterativeRobot {
 	private static final int IMG_HEIGHT = 240;
 	
 	private VisionThread visionThread;
-	private double centerX = 0.0;
-	private RobotDrive drive;
-	
+	private double centerX1 = 0.0;
+	private double centerX2 = 0.0;
 	public final Object imgLock = new Object();
 	
 	Command autonomousCommand;
