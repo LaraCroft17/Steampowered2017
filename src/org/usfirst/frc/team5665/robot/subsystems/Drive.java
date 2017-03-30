@@ -27,7 +27,7 @@ public class Drive extends Subsystem {
 	}
 	
 	public void arcadeDrive(double xAxis, double yAxis) {
-		robotDrive4.arcadeDrive(yAxis, xAxis);
+		robotDrive4.arcadeDrive(yAxis, xAxis/2);
 	}
 	public void setSensitivity(double sensitivity) {
 		robotDrive4.setMaxOutput(sensitivity);

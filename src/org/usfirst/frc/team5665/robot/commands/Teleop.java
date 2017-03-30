@@ -29,7 +29,7 @@ public class Teleop extends Command {
 	@Override
 	protected void execute() {
 		Joystick j1 = Robot.oi.getJoystick();
-		Joystick j2 = Robot.oi.getJoystick();
+		Joystick j2 = Robot.oi.getJoystick2();
 		
 		//Sensitivity
 		if(j1.getRawButton(9)) {
@@ -41,7 +41,7 @@ public class Teleop extends Command {
 		}
 		
 		//Drive, Slider, Ramp
-		Robot.drive.arcadeDrive(j1.getRawAxis(0), j1.getRawAxis(1));
+		Robot.drive.arcadeDrive(j1.getRawAxis(0)*((j1.getRawAxis(3)-j1.getRawAxis(2))+1), j1.getRawAxis(1));
 		Robot.gearHolder.moveSlider(j1.getRawAxis(4));
 		Robot.ramp.moveRamp(j1.getRawAxis(5));
 		
