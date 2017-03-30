@@ -1,10 +1,16 @@
 
 package org.usfirst.frc.team5665.robot;
 
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.vision.VisionRunner;
+import edu.wpi.first.wpilibj.vision.VisionThread;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -40,6 +46,15 @@ public class Robot extends IterativeRobot {
 	
 	public static boolean calibrateEnabled;
 	
+	private static final int IMG_WIDTH = 320;
+	private static final int IMG_HEIGHT = 240;
+	
+	private VisionThread visionThread;
+	private double centerX = 0.0;
+	private RobotDrive drive;
+	
+	public final Object imgLock = new Object();
+	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -67,7 +82,20 @@ public class Robot extends IterativeRobot {
 		//Debug commands
 		SmartDashboard.putData("Auto Mode", chooser);
 		
-		CameraServer.getInstance().startAutomaticCapture();
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
+    
+    		visionThread = new VisionThread(camera, new Pipeline(), pipeline -> {
+        		if (!(pipeline.filterContoursOutput().size() < 2)) {
+            			Rect r1 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+				Rect r2 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(1));
+            			synchronized (imgLock) {
+                		centerX1 = r1.x + (r1.width / 2);
+				centerX2 = r2.x + (r2.width / 2);
+            			}
+        		}
+    		});
+    		visionThread.start();
 	}
 
 	/**
