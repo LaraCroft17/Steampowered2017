@@ -4,20 +4,25 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team5665.robot.Robot;
+import org.usfirst.frc.team5665.robot.subsystems.Sensor;
 
 /**
  *
  */
-public class ArcadeDrive extends Command {
+public class ArcadeDriveDisplacement extends Command {
 	
-	private boolean isFinished = false;
-	private double xAxis,yAxis,duration;
+	private double xCurDisp,yCurDisp;
+	private double xDisp,yDisp;
+	private double xAxis,yAxis;
 	
-	public ArcadeDrive(double xAxis, double yAxis, double duration) {
+	public ArcadeDriveDisplacement(double xAxis, double yAxis, double xDisp, double yDisp) {
 		// Use requires() here to declare subsystem dependencies
 		this.xAxis = xAxis;
 		this.yAxis = yAxis;
-		this.duration = duration;
+		this.xDisp = xDisp;
+		this.yDisp = yDisp;
+		xCurDisp = 0;
+		yCurDisp = 0;
 		requires(Robot.drive);
 	}
 
@@ -30,14 +35,12 @@ public class ArcadeDrive extends Command {
 	@Override
 	protected void execute() {
 		Robot.drive.arcadeDrive(xAxis, yAxis);
-		Timer.delay(duration);
-		isFinished = true;
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return isFinished;
+		return (xCurDisp > xDisp) && (yCurDisp > yDisp);
 	}
 
 	// Called once after isFinished returns true

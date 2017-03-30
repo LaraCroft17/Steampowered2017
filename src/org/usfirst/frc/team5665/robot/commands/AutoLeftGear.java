@@ -13,8 +13,8 @@ public class AutoLeftGear extends CommandGroup {
 		requires(Robot.drive);
 		requires(Robot.gearHolder);
 		
-		double velocity = Robot.velocity;
-		double revolution = Robot.revolution;
+		addSequential(new ArcadeDrive(0,1,0,2));
+		
 		
 		//Move forward, turn 30 degrees, move into gear position, activate vision
 		//Stretch goal: Go back, dump balls (SPECIFICALLY LEFT SIDE), turn 30 reverse, go forward into neutral area

@@ -12,9 +12,7 @@ public class AutoLeftForward extends CommandGroup {
 	public AutoLeftForward() {
 		requires(Robot.drive);
 		
-		double velocity = Robot.velocity;
-		
-		addSequential(new ArcadeDrive(0,1,2.5/velocity));
+		addSequential(new ArcadeDrive(0,1,0,5));
 		
 		// Add Commands here:
         // e.g. addSequential(new Command1());
