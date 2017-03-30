@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -12,10 +13,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5665.robot.commands.AutoLeftForward;
 import org.usfirst.frc.team5665.robot.commands.AutoLeftGear;
 import org.usfirst.frc.team5665.robot.commands.AutoMiddleGear;
-import org.usfirst.frc.team5665.robot.commands.AutoMove;
 import org.usfirst.frc.team5665.robot.commands.AutoRightForward;
 import org.usfirst.frc.team5665.robot.commands.AutoRightGear;
-import org.usfirst.frc.team5665.robot.commands.AutoSpin;
 import org.usfirst.frc.team5665.robot.subsystems.Climber;
 import org.usfirst.frc.team5665.robot.subsystems.Drive;
 import org.usfirst.frc.team5665.robot.subsystems.FuelCollector;
@@ -31,11 +30,6 @@ import org.usfirst.frc.team5665.robot.RobotMap;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-	//Meters per second
-	public static final double velocity = 0;
-	//Revolutions per second
-	public static final double revolution = 0;
 
 	public static Drive drive;
 	public static Climber climber;
@@ -71,8 +65,6 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Left Gear", new AutoLeftGear());
 		chooser.addObject("Right Gear", new AutoRightGear());
 		//Debug commands
-		chooser.addObject("Velocity test", new AutoMove());
-		chooser.addObject("Revolution test", new AutoSpin());
 		SmartDashboard.putData("Auto Mode", chooser);
 		
 		CameraServer.getInstance().startAutomaticCapture();

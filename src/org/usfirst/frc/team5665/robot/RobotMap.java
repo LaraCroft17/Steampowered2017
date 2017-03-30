@@ -1,9 +1,16 @@
 package org.usfirst.frc.team5665.robot;
 
+import edu.wpi.first.wpilibj.ADXL345_I2C;
+import edu.wpi.first.wpilibj.ADXL362;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -56,6 +63,10 @@ public class RobotMap {
 	public static DigitalInput fuelCollectorSwitchTop;
 	public static DigitalInput fuelCollectorSwitchBottom;
 	
+	//Sensors
+	public static Gyro sensorGyro;
+	public static Accelerometer sensorAccelerometer;
+	
 	public static void init() {
 		 driveRightRear = new Victor(driveRightRearPort);
 		 driveRightFront = new Victor(driveRightFrontPort);
@@ -81,5 +92,8 @@ public class RobotMap {
 	     rampSwitchBottom = new DigitalInput(rampSwitchBottomPort);
 	     fuelCollectorSwitchTop = new DigitalInput(fuelCollectorSwitchTopPort);
 	     fuelCollectorSwitchBottom = new DigitalInput(fuelCollectorSwitchBottomPort);
+	     
+	     sensorAccelerometer = new ADXL362(Accelerometer.Range.k4G);
+	     sensorGyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 	}
 }
