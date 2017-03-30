@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5665.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -15,9 +16,15 @@ public class AutoMiddleGear extends CommandGroup {
 		
 		double velocity = Robot.velocity;
 		
-		addSequential(new ArcadeDrive(0,1,2.0/velocity));
-		addParallel(new ArcadeDrive(0,1,0.5/velocity));
-		addSequential(new MoveGearHolder(0.5/velocity));
+		addSequential(new ArcadeDrive(0,1,2.5/velocity));
+		Timer.delay(2);
+		addSequential(new ArcadeDrive(0,-1,0.5/velocity));
+		addSequential(new MoveGearHolder(0.5,0.2));
+		addSequential(new ArcadeDrive(0,1,0.5/velocity));
+		Timer.delay(2);
+		addSequential(new ArcadeDrive(0,-1,0.5/velocity));
+		addSequential(new MoveGearHolder(-0.5,0.4));
+		addSequential(new ArcadeDrive(0,-1,0.5/velocity));
 		
 		// Add Commands here:
         // e.g. addSequential(new Command1());

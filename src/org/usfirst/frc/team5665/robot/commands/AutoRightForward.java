@@ -14,7 +14,8 @@ public class AutoRightForward extends CommandGroup {
 		
 		double velocity = Robot.velocity;
 		
-		addSequential(new ArcadeDrive(0,1,2.5/velocity));
+		addSequential(new ArcadeDrive(0,1,3/velocity));
+		addSequential(new ArcadeDrive(0,-1,1/velocity));
 		
 		// Add Commands here:
         // e.g. addSequential(new Command1());

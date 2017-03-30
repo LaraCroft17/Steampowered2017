@@ -33,9 +33,9 @@ import org.usfirst.frc.team5665.robot.RobotMap;
 public class Robot extends IterativeRobot {
 
 	//Meters per second
-	public static final double velocity = 0;
+	public static final double velocity = 1;
 	//Revolutions per second
-	public static final double revolution = 0;
+	public static final double revolution = 0.5;
 
 	public static Drive drive;
 	public static Climber climber;
@@ -65,7 +65,7 @@ public class Robot extends IterativeRobot {
 		
 		calibrateEnabled = false;
 		
-		chooser.addDefault("Middle", new AutoMiddleGear());
+		chooser.addDefault("Middle Gear", new AutoMiddleGear());
 		chooser.addObject("Left Charge", new AutoLeftForward());
 		chooser.addObject("Right Charge", new AutoRightForward());
 		chooser.addObject("Left Gear", new AutoLeftGear());

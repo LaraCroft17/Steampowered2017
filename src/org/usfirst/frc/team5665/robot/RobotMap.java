@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj.Victor;
 public class RobotMap {
 	
 	//Sensitivity constants
-	public static double driveTurningSensitivity = 0.8;
-	public static double driveMasterSensitivity = 0.4;
-	public static double driveMasterAltSensitivity = 0.6;
+	public static double driveTurningSensitivity = 0.6;
+	public static double driveMasterSensitivity = 0.55;
+	public static double driveMasterAltSensitivity = 0.85;
 	public static double driveMasterSpecSensitivity = 0.2;
 	
 	//Analog ports
@@ -70,7 +70,7 @@ public class RobotMap {
 		 
 		 driveRobotDrive4 = new RobotDrive(driveLeftFront, driveLeftRear, driveRightFront, driveRightRear);
 		 
-		 driveRobotDrive4.setSafetyEnabled(true);
+		 driveRobotDrive4.setSafetyEnabled(false);
 	     driveRobotDrive4.setExpiration(0.1);
 	     driveRobotDrive4.setSensitivity(driveTurningSensitivity);
 	     driveRobotDrive4.setMaxOutput(driveMasterSensitivity);

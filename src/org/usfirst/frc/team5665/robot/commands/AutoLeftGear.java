@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5665.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -15,6 +16,17 @@ public class AutoLeftGear extends CommandGroup {
 		
 		double velocity = Robot.velocity;
 		double revolution = Robot.revolution;
+		
+		addSequential(new ArcadeDrive(0,1,2.5/velocity));
+		addSequential(new ArcadeDrive(0.4,0.6,1/velocity));
+		Timer.delay(2);
+		addSequential(new ArcadeDrive(0,-1,0.5/velocity));
+		addSequential(new MoveGearHolder(0.5,0.2));
+		addSequential(new ArcadeDrive(0,1,0.5/velocity));
+		Timer.delay(2);
+		addSequential(new ArcadeDrive(0,-1,0.5/velocity));
+		addSequential(new MoveGearHolder(-0.5,0.4));
+		addSequential(new ArcadeDrive(0,-1,0.5/velocity));
 		
 		//Move forward, turn 30 degrees, move into gear position, activate vision
 		//Stretch goal: Go back, dump balls (SPECIFICALLY LEFT SIDE), turn 30 reverse, go forward into neutral area

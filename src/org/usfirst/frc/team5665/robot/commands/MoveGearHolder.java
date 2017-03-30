@@ -11,11 +11,12 @@ import org.usfirst.frc.team5665.robot.Robot;
 public class MoveGearHolder extends Command {
 	
 	boolean isFinished = false;
-	private double duration;
+	private double duration,rate;
 	
-	public MoveGearHolder(double duration) {
+	public MoveGearHolder(double rate, double duration) {
 		// Use requires() here to declare subsystem dependencies
 		this.duration = duration;
+		this.rate = rate;
 		requires(Robot.gearHolder);
 	}
 
@@ -27,8 +28,7 @@ public class MoveGearHolder extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		
-		//TODO Add vision processed decisions here
+		Robot.gearHolder.moveSlider(rate);
 		Timer.delay(duration);
 		isFinished = true;
 	}
