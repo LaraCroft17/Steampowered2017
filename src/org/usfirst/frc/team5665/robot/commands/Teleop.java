@@ -34,7 +34,7 @@ public class Teleop extends Command {
 		//Sensitivity
 		if(j1.getRawButton(9)) {
 			Robot.drive.setSensitivity(RobotMap.driveMasterAltSensitivity);
-		} else if (j2.getRawButton(1)) {
+		} else if (j2.getRawButton(1) || j1.getRawAxis(3)>0.25) {
 			Robot.drive.setSensitivity(RobotMap.driveMasterSpecSensitivity);
 		} else {
 			Robot.drive.setSensitivity(RobotMap.driveMasterSensitivity);
@@ -54,12 +54,11 @@ public class Teleop extends Command {
 		}
 		
 		//Climber
-		if(j1.getRawButton(3)) {
-			Robot.climber.moveClimber(1.0);
-		} else if (j2.getRawButton(5) && j2.getRawButton(6)) {
-			Robot.climber.moveClimber(-1.0);
-		} else {
-			Robot.climber.moveClimber(0.0);
+		if(j2.getRawAxis(1)<0) {
+			Robot.climber.moveClimber(-j2.getRawAxis(1));
+		}
+		else {
+			Robot.climber.moveClimber(0);
 		}
 		
 		//Lift

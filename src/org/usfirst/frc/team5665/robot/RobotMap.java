@@ -15,9 +15,9 @@ public class RobotMap {
 	
 	//Sensitivity constants
 	public static double driveTurningSensitivity = 1.0;
-	public static double driveMasterSensitivity = 0.55;
-	public static double driveMasterAltSensitivity = 0.85;
-	public static double driveMasterSpecSensitivity = 0.2;
+	public static double driveMasterSensitivity = 0.65;
+	public static double driveMasterAltSensitivity = 0.75;
+	public static double driveMasterSpecSensitivity = 0.25;
 	
 	//Analog ports
 	public static int driveRightRearPort = 4;
@@ -25,6 +25,7 @@ public class RobotMap {
 	public static int driveLeftRearPort = 1;
 	public static int driveLeftFrontPort = 2;
 	public static int climberMotorPort = 8;
+	public static int climberExtraMotorPort = 0;
 	public static int rampMotorPort = 7;
 	public static int fuelCollectorLiftPort = 6;
 	public static int gearHolderSliderPort = 5;
@@ -37,25 +38,19 @@ public class RobotMap {
 	public static int fuelCollectorSwitchTopPort = 0;
 	public static int fuelCollectorSwitchBottomPort = 1;
 	
-	// For example to map the left and right motors, you could define the
-	// following variables to use with your drivetrain subsystem.
-	// public static int leftMotor = 1;
-	// public static int rightMotor = 2;
-	// If you are using multiple modules, make sure to define both the port
-	// Portber and the module. For example you with a rangefinder:
-	// public static int rangefinderPort = 1;
-	// public static int rangefinderModule = 1;
-	
+	//Motors
 	public static SpeedController driveRightRear;
 	public static SpeedController driveRightFront;
 	public static SpeedController driveLeftRear;
 	public static SpeedController driveLeftFront;
 	public static RobotDrive driveRobotDrive4;
 	public static SpeedController climberMotor;
+	public static SpeedController climberExtraMotor;
 	public static SpeedController rampMotor;
 	public static SpeedController fuelCollectorLift;
 	public static SpeedController gearHolderSlider;
 	
+	//Switches
 	public static DigitalInput gearHolderSwitchLeft;
 	public static DigitalInput gearHolderSwitchRight;
 	public static DigitalInput rampSwitchTop;
@@ -69,14 +64,16 @@ public class RobotMap {
 		 driveLeftRear = new Victor(driveLeftRearPort);
 		 driveLeftFront = new Victor(driveLeftFrontPort);
 		 climberMotor = new Victor(climberMotorPort);
+		 climberExtraMotor = new Victor(climberExtraMotorPort);
 		 rampMotor = new Victor(rampMotorPort);
 		 fuelCollectorLift = new Victor(fuelCollectorLiftPort);
 		 gearHolderSlider = new Victor(gearHolderSliderPort);
 		 
 		 gearHolderSlider.setInverted(true);
 		 climberMotor.setInverted(true);
+		 climberExtraMotor.setInverted(true);
 		 
-		 driveRobotDrive4 = new RobotDrive(driveLeftFront, driveLeftRear, driveRightFront, driveRightRear);
+		 driveRobotDrive4 = new RobotDrive(driveLeftFront, driveRightFront);
 		 
 		 driveRobotDrive4.setSafetyEnabled(true);
 	     driveRobotDrive4.setExpiration(0.1);

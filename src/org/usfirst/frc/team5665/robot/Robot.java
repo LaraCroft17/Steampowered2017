@@ -9,7 +9,13 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team5665.robot.commands.AutoCommand;
+import org.usfirst.frc.team5665.robot.commands.AutoLeftForward;
+import org.usfirst.frc.team5665.robot.commands.AutoLeftGear;
+import org.usfirst.frc.team5665.robot.commands.AutoMiddleGear;
+import org.usfirst.frc.team5665.robot.commands.AutoMove;
+import org.usfirst.frc.team5665.robot.commands.AutoRightForward;
+import org.usfirst.frc.team5665.robot.commands.AutoRightGear;
+import org.usfirst.frc.team5665.robot.commands.AutoSpin;
 import org.usfirst.frc.team5665.robot.subsystems.Climber;
 import org.usfirst.frc.team5665.robot.subsystems.Drive;
 import org.usfirst.frc.team5665.robot.subsystems.FuelCollector;
@@ -26,6 +32,11 @@ import org.usfirst.frc.team5665.robot.RobotMap;
  */
 public class Robot extends IterativeRobot {
 
+	//Meters per second
+	public static final double velocity = 1.25;
+	//Revolutions per second
+	public static final double revolution = 0.5;
+
 	public static Drive drive;
 	public static Climber climber;
 	public static FuelCollector fuelCollector;
@@ -34,7 +45,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	
 	public static boolean calibrateEnabled;
-
+	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -54,9 +65,15 @@ public class Robot extends IterativeRobot {
 		
 		calibrateEnabled = false;
 		
-		chooser.addDefault("Default", new AutoCommand());
-		//chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		chooser.addDefault("Middle Gear", new AutoMiddleGear());
+		chooser.addObject("Left Charge", new AutoLeftForward());
+		chooser.addObject("Right Charge", new AutoRightForward());
+		chooser.addObject("Left Gear", new AutoLeftGear());
+		chooser.addObject("Right Gear", new AutoRightGear());
+		//Debug commands
+		chooser.addObject("Velocity test", new AutoMove());
+		chooser.addObject("Revolution test", new AutoSpin());
+		SmartDashboard.putData("Auto Mode", chooser);
 		
 		CameraServer.getInstance().startAutomaticCapture();
 	}
