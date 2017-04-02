@@ -8,46 +8,41 @@ import org.usfirst.frc.team5665.robot.Robot;
 /**
  *
  */
-public class ArcadeDrive extends Command {
+public class SetSensitivity extends Command {
 	
-	private double xAxis,yAxis,duration,startTime;
+	private double sensitivity;
 	
-	public ArcadeDrive(double xAxis, double yAxis, double duration) {
+	public SetSensitivity(double sensitivity) {
 		// Use requires() here to declare subsystem dependencies
-		this.xAxis = xAxis;
-		this.yAxis = yAxis;
-		this.duration = duration;
 		requires(Robot.drive);
+		this.sensitivity = sensitivity;
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		startTime = Timer.getFPGATimestamp();
+		Robot.drive.setSensitivity(sensitivity);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.drive.arcadeDrive(xAxis, -yAxis);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return (Timer.getFPGATimestamp() >= (startTime+duration));
+		return true;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.drive.arcadeDrive(0, 0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		Robot.drive.arcadeDrive(0, 0);
 	}
 }

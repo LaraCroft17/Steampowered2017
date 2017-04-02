@@ -33,7 +33,7 @@ import org.usfirst.frc.team5665.robot.RobotMap;
 public class Robot extends IterativeRobot {
 
 	//Meters per second
-	public static final double velocity = 1;
+	public static final double velocity = 1.25;
 	//Revolutions per second
 	public static final double revolution = 0.5;
 

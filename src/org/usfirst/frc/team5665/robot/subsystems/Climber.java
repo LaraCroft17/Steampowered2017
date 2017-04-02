@@ -12,6 +12,7 @@ public class Climber extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	private final SpeedController motor = RobotMap.climberMotor;
+	private final SpeedController extraMotor = RobotMap.climberExtraMotor;
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -20,5 +21,6 @@ public class Climber extends Subsystem {
 	
 	public void moveClimber(double rate) {
 		motor.set(rate);
+		extraMotor.set(rate);
 	}
 }

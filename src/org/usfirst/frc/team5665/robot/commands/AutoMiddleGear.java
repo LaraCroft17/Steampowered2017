@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 import org.usfirst.frc.team5665.robot.Robot;
+import org.usfirst.frc.team5665.robot.RobotMap;
 
 /**
  *
@@ -16,15 +17,15 @@ public class AutoMiddleGear extends CommandGroup {
 		
 		double velocity = Robot.velocity;
 		
+		addSequential(new SetSensitivity(0.55));
 		addSequential(new ArcadeDrive(0,1,2.5/velocity));
-		Timer.delay(2);
-		addSequential(new ArcadeDrive(0,-1,0.5/velocity));
-		addSequential(new MoveGearHolder(0.5,0.2));
-		addSequential(new ArcadeDrive(0,1,0.5/velocity));
-		Timer.delay(2);
-		addSequential(new ArcadeDrive(0,-1,0.5/velocity));
-		addSequential(new MoveGearHolder(-0.5,0.4));
-		addSequential(new ArcadeDrive(0,-1,0.5/velocity));
+		addSequential(new Delay(4));
+		addSequential(new ArcadeDrive(0,-0.6,1/velocity));
+		addSequential(new ArcadeDrive(0,0.6,1/velocity));
+		addSequential(new Delay(4));
+		addSequential(new ArcadeDrive(0,-0.6,1/velocity));
+		addSequential(new ArcadeDrive(0,0.6,1/velocity));
+		addSequential(new SetSensitivity(RobotMap.driveMasterSensitivity));
 		
 		// Add Commands here:
         // e.g. addSequential(new Command1());

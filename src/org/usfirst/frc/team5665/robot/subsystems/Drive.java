@@ -27,7 +27,11 @@ public class Drive extends Subsystem {
 	}
 	
 	public void arcadeDrive(double xAxis, double yAxis) {
-		robotDrive4.arcadeDrive(yAxis, xAxis);
+		double yInput = Math.sin(yAxis*Math.PI/2);
+		
+		robotDrive4.arcadeDrive(yInput, xAxis);
+		System.out.println("front: "+leftFront.get()+" "+rightFront.get());
+		System.out.println("rear: "+leftRear.get()+" "+rightRear.get());
 	}
 	public void setSensitivity(double sensitivity) {
 		robotDrive4.setMaxOutput(sensitivity);

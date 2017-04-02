@@ -19,11 +19,11 @@ public class AutoRightGear extends CommandGroup {
 		
 		addSequential(new ArcadeDrive(0,1,2.5/velocity));
 		addSequential(new ArcadeDrive(-0.4,0.6,1/velocity));
-		Timer.delay(2);
+		addSequential(new Delay(3));
 		addSequential(new ArcadeDrive(0,-1,0.5/velocity));
 		addSequential(new MoveGearHolder(0.5,0.2));
 		addSequential(new ArcadeDrive(0,1,0.5/velocity));
-		Timer.delay(2);
+		addSequential(new Delay(3));
 		addSequential(new ArcadeDrive(0,-1,0.5/velocity));
 		addSequential(new MoveGearHolder(-0.5,0.4));
 		addSequential(new ArcadeDrive(0,-1,0.5/velocity));

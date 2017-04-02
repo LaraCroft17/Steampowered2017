@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.Victor;
 public class RobotMap {
 	
 	//Sensitivity constants
-	public static double driveTurningSensitivity = 0.6;
-	public static double driveMasterSensitivity = 0.55;
-	public static double driveMasterAltSensitivity = 0.85;
-	public static double driveMasterSpecSensitivity = 0.2;
+	public static double driveTurningSensitivity = 1.0;
+	public static double driveMasterSensitivity = 0.65;
+	public static double driveMasterAltSensitivity = 0.75;
+	public static double driveMasterSpecSensitivity = 0.25;
 	
 	//Analog ports
 	public static int driveRightRearPort = 4;
@@ -25,6 +25,7 @@ public class RobotMap {
 	public static int driveLeftRearPort = 1;
 	public static int driveLeftFrontPort = 2;
 	public static int climberMotorPort = 8;
+	public static int climberExtraMotorPort = 0;
 	public static int rampMotorPort = 7;
 	public static int fuelCollectorLiftPort = 6;
 	public static int gearHolderSliderPort = 5;
@@ -44,6 +45,7 @@ public class RobotMap {
 	public static SpeedController driveLeftFront;
 	public static RobotDrive driveRobotDrive4;
 	public static SpeedController climberMotor;
+	public static SpeedController climberExtraMotor;
 	public static SpeedController rampMotor;
 	public static SpeedController fuelCollectorLift;
 	public static SpeedController gearHolderSlider;
@@ -62,15 +64,19 @@ public class RobotMap {
 		 driveLeftRear = new Victor(driveLeftRearPort);
 		 driveLeftFront = new Victor(driveLeftFrontPort);
 		 climberMotor = new Victor(climberMotorPort);
+		 climberExtraMotor = new Victor(climberExtraMotorPort);
 		 rampMotor = new Victor(rampMotorPort);
 		 fuelCollectorLift = new Victor(fuelCollectorLiftPort);
 		 gearHolderSlider = new Victor(gearHolderSliderPort);
 		 
 		 gearHolderSlider.setInverted(true);
+		 climberMotor.setInverted(true);
+		 climberExtraMotor.setInverted(true);
 		 
-		 driveRobotDrive4 = new RobotDrive(driveLeftFront, driveLeftRear, driveRightFront, driveRightRear);
 		 
-		 driveRobotDrive4.setSafetyEnabled(false);
+		 driveRobotDrive4 = new RobotDrive(driveLeftFront, driveRightFront);
+		 
+		 driveRobotDrive4.setSafetyEnabled(true);
 	     driveRobotDrive4.setExpiration(0.1);
 	     driveRobotDrive4.setSensitivity(driveTurningSensitivity);
 	     driveRobotDrive4.setMaxOutput(driveMasterSensitivity);

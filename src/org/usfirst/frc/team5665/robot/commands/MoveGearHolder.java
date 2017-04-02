@@ -10,33 +10,31 @@ import org.usfirst.frc.team5665.robot.Robot;
  */
 public class MoveGearHolder extends Command {
 	
-	boolean isFinished = false;
-	private double duration,rate;
+	private double rate,duration,startTime;
 	
 	public MoveGearHolder(double rate, double duration) {
 		// Use requires() here to declare subsystem dependencies
-		this.duration = duration;
 		this.rate = rate;
+		this.duration = duration;
 		requires(Robot.gearHolder);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		startTime = Timer.getFPGATimestamp();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		Robot.gearHolder.moveSlider(rate);
-		Timer.delay(duration);
-		isFinished = true;
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return isFinished;
+		return (Timer.getFPGATimestamp() >= (startTime+duration));
 	}
 
 	// Called once after isFinished returns true
@@ -49,5 +47,6 @@ public class MoveGearHolder extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		Robot.gearHolder.moveSlider(0);
 	}
 }
